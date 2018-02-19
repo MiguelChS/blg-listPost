@@ -1,0 +1,39 @@
+.paginado {
+    margin-bottom: 53px;
+}
+
+.paginado>ul {
+    border-radius: 0;
+    margin: 0;
+}
+
+.paginado>ul>li {
+    display: inline-block;
+    margin-left: 4px;
+}
+
+.paginado>ul>li>a:last-child,
+.paginado>ul>li>a:first-child {
+    border-radius: 0;
+}
+
+.paginado>ul>li>a:hover {
+    background: #da521e;
+    color: white;
+}
+
+.paginado>ul>li.active > a {
+    background: #da521e;
+    color: white;
+}
+
+.paginado>ul>li>a {
+    margin-left: 0;
+    color: #444;
+    border: 0;
+    background: #fff;
+    font-family: "Oswald", sans-serif;
+    padding: 6px 13px;
+    -webkit-box-shadow: 0 0 2px 0 rgba(51, 51, 51, 0.08), 0 0 2px 0 rgba(51, 51, 51, 0.08);
+    box-shadow: 0 0 2px 0 rgba(51, 51, 51, 0.08), 0 0 2px 0 rgba(51, 51, 51, 0.08);
+}
