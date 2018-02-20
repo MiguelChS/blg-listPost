@@ -14,5 +14,5 @@ export declare class Paginado extends React.Component<IProps, IState> {
     pageNext: () => void;
     pagePrevie: () => void;
     renderNumber: () => JSX.Element[];
-    render(): JSX.Element;
+    render(): JSX.Element | null;
 }

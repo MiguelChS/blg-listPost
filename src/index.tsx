@@ -3,12 +3,30 @@ import { Post, IProps as postProps } from 'blg-post';
 import { Paginado } from './paginado'
 
 export interface IProps {
-    listPost: Array<postProps>
+
 }
+const lista: Array<postProps> = []
+
+for (let i = 0; i < 21; i++) {
+    lista.push(
+        {
+            urlImage: "http://demo.shapedtheme.com/kotha-pro-html/assets/images/post-thumb-1.jpg",
+            dateString: "Octubre 13, 2017",
+            detalle: {
+                categoria: `${i}`,
+                descripcion: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua...",
+                title: "ADVENTURE TO TRAVEL LONELY",
+                linkPost: "#"
+            }
+        }
+    )
+}
+
 
 export interface IState {
     pagina: number
     maximoPost: number
+    listPost: Array<postProps>
 }
 
 export class ListPost extends React.Component<IProps, IState>{
@@ -16,7 +34,8 @@ export class ListPost extends React.Component<IProps, IState>{
         super(props);
         this.state = {
             pagina: 0,
-            maximoPost: 10
+            maximoPost: 10,
+            listPost: []
         }
     }
 
@@ -26,13 +45,17 @@ export class ListPost extends React.Component<IProps, IState>{
 
     renderPost = (): Array<JSX.Element> => {
         let listPost: Array<JSX.Element> = [];
-        let max = ((this.state.pagina + 1) * 5) > this.props.listPost.length ? this.props.listPost.length : ((this.state.pagina + 1) * 5)
+        let max = ((this.state.pagina + 1) * 5) > this.state.listPost.length ? this.state.listPost.length : ((this.state.pagina + 1) * 5)
         for (let i = (this.state.pagina * 5); i < max; i++) {
             listPost.push(
-                <Post key={i} {...this.props.listPost[i]} />
+                <Post key={i} {...this.state.listPost[i]} />
             )
         }
         return listPost;
+    }
+
+    componentDidMount() {
+        this.setState({ listPost: lista })
     }
 
     render() {
@@ -42,7 +65,7 @@ export class ListPost extends React.Component<IProps, IState>{
                     {this.renderPost()}
                 </div>
                 <Paginado
-                    cantPagina={Math.ceil((this.props.listPost.length / 5))}
+                    cantPagina={Math.ceil((this.state.listPost.length / 5))}
                     pageSelected={this.paginaSelecionada}
                 />
             </div>

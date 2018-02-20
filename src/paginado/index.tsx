@@ -59,6 +59,7 @@ export class Paginado extends React.Component<IProps, IState>{
     }
 
     render() {
+        if(!this.props.cantPagina) return null;
         return (
             <div className={`${paginado} clearfix`}>
                 <ul className="pagination text-left">
