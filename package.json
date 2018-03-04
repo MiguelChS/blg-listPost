@@ -1,6 +1,6 @@
 {
   "name": "blg-listpost",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -14,7 +14,7 @@
     "react": "^16.2.0"
   },
   "dependencies": {
-    "blg-post": "git+ssh://git@github.com/MiguelChS/blg-post.git#1.0.0",
+    "blg-post": "git+ssh://git@github.com/mj-cn/blg-post.git",
     "react": "^16.2.0"
   },
   "devDependencies": {
