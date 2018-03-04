@@ -125,24 +125,19 @@ if(false) {
 
 "use strict";
 
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 const React = __webpack_require__(0);
 const blg_post_1 = __webpack_require__(3);
 const paginado_1 = __webpack_require__(4);
-const lista = [];
-for (let i = 0; i < 21; i++) {
-    lista.push({
-        urlImage: "http://demo.shapedtheme.com/kotha-pro-html/assets/images/post-thumb-1.jpg",
-        dateString: "Octubre 13, 2017",
-        detalle: {
-            categoria: `${i}`,
-            descripcion: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua...",
-            title: "ADVENTURE TO TRAVEL LONELY",
-            linkPost: "#",
-            typePost: blg_post_1.enumTypePost.PREPOST
-        }
-    });
-}
+const service_1 = __webpack_require__(10);
 class ListPost extends React.Component {
     constructor(props) {
         super(props);
@@ -164,7 +159,10 @@ class ListPost extends React.Component {
         };
     }
     componentDidMount() {
-        this.setState({ listPost: lista });
+        return __awaiter(this, void 0, void 0, function* () {
+            let lista = yield service_1.getListPost();
+            this.setState({ listPost: lista });
+        });
     }
     render() {
         return (React.createElement("div", null,
@@ -832,6 +830,32 @@ exports.Li = ({ numero, selectedNum, className }) => {
     return (React.createElement("li", { className: className, onClick: () => selectedNum(numero) },
         React.createElement("a", { href: "javascript:void(0)" }, numero)));
 };
+
+
+/***/ }),
+/* 10 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+function getListPost() {
+    return __awaiter(this, void 0, void 0, function* () {
+        let response = yield fetch("/api/listPost");
+        if (!response.ok || response.status != 200)
+            return [];
+        return yield response.json();
+    });
+}
+exports.getListPost = getListPost;
 
 
 /***/ })

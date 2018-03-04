@@ -1,28 +1,11 @@
 import * as React from 'react';
 import { Post, IProps as postProps, enumTypePost } from 'blg-post';
-import { Paginado } from './paginado'
+import { Paginado } from './paginado';
+import { getListPost } from './service';
 
 export interface IProps {
 
 }
-const lista: Array<postProps> = []
-
-for (let i = 0; i < 21; i++) {
-    lista.push(
-        {
-            urlImage: "http://demo.shapedtheme.com/kotha-pro-html/assets/images/post-thumb-1.jpg",
-            dateString: "Octubre 13, 2017",
-            detalle: {
-                categoria: `${i}`,
-                descripcion: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua...",
-                title: "ADVENTURE TO TRAVEL LONELY",
-                linkPost: "#",
-                typePost: enumTypePost.PREPOST
-            }
-        }
-    )
-}
-
 
 export interface IState {
     pagina: number
@@ -55,7 +38,8 @@ export class ListPost extends React.Component<IProps, IState>{
         return listPost;
     }
 
-    componentDidMount() {
+    async componentDidMount() {
+        let lista = await getListPost();
         this.setState({ listPost: lista })
     }
 

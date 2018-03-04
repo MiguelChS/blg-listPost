@@ -12,6 +12,6 @@ export declare class ListPost extends React.Component<IProps, IState> {
     constructor(props: IProps);
     paginaSelecionada: (numPage: number) => void;
     renderPost: () => JSX.Element[];
-    componentDidMount(): void;
+    componentDidMount(): Promise<void>;
     render(): JSX.Element;
 }
