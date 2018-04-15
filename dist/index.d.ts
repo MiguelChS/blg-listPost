@@ -1,6 +1,7 @@
 /// <reference types="react" />
 import * as React from 'react';
 import { IProps as postProps } from 'blg-post';
+import './index.scss';
 export interface IProps {
 }
 export interface IState {

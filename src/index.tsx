@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Post, IProps as postProps, enumTypePost } from 'blg-post';
 import { Paginado } from './paginado';
 import { getListPost } from './service';
+import './index.scss';
 
 export interface IProps {
 
@@ -45,7 +46,7 @@ export class ListPost extends React.Component<IProps, IState>{
 
     render() {
         return (
-            <div>
+            <div className="blg-listPost">
                 <div>
                     {this.renderPost()}
                 </div>

@@ -1,6 +1,4 @@
 import * as React from 'react';
-import './index.css'
-import { paginado, active } from './index.css';
 import { Li } from './li';
 
 export interface IProps {
@@ -49,7 +47,7 @@ export class Paginado extends React.Component<IProps, IState>{
                     key={num}
                     numero={num}
                     selectedNum={this.pageSelected}
-                    className={num == this.state.pageSeled ? active : ''}
+                    className={num == this.state.pageSeled ? 'active' : ''}
                 />
             )
             num++;
@@ -61,7 +59,7 @@ export class Paginado extends React.Component<IProps, IState>{
     render() {
         if(!this.props.cantPagina) return null;
         return (
-            <div className={`${paginado} clearfix`}>
+            <div className="paginado clearfix">
                 <ul className="pagination text-left">
                     <li onClick={this.pagePrevie}>
                         <a href="javascript:void(0)">
