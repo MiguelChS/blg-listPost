@@ -2,10 +2,17 @@ import * as React from 'react';
 import { Post, IProps as postProps, enumTypePost } from 'blg-post';
 import { Paginado } from './paginado';
 import { getListPost } from './service';
+import { connect } from 'react-redux';
 import './index.scss';
-
+import { Dispatch } from 'redux';
+import { loadListPost } from './action';
+export * from './action'
+export * from './reducer'
 export interface IProps {
-
+    match?: {
+        params: any
+    }
+    loadList(data: Array<any>): any
 }
 
 export interface IState {
@@ -14,7 +21,7 @@ export interface IState {
     listPost: Array<postProps>
 }
 
-export class ListPost extends React.Component<IProps, IState>{
+class ListPostComponent extends React.Component<IProps, IState>{
     constructor(props: IProps) {
         super(props);
         this.state = {
@@ -40,8 +47,10 @@ export class ListPost extends React.Component<IProps, IState>{
     }
 
     async componentDidMount() {
-        let lista = await getListPost();
+        let category = this.props.match ? this.props.match.params.category : null;
+        let lista = await getListPost(category);
         this.setState({ listPost: lista })
+        this.props.loadList(lista);
     }
 
     render() {
@@ -58,3 +67,12 @@ export class ListPost extends React.Component<IProps, IState>{
         )
     }
 }
+
+const mapDispacht = (dispatch: any) => {
+    return {
+        loadList: (data: Array<any>) => {
+            dispatch(loadListPost(data));
+        }
+    }
+}
+export const ListPost = connect(null, mapDispacht)(ListPostComponent)

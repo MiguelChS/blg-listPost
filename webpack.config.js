@@ -52,6 +52,7 @@ module.exports = {
     ],
     externals: {
         react: "react",
-        "blg-post": "blg-post"
+        "blg-post": "blg-post",
+        "react-redux": "react-redux"
     }
 };

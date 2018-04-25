@@ -1,18 +1,21 @@
 /// <reference types="react" />
+/// <reference types="react-redux" />
 import * as React from 'react';
 import { IProps as postProps } from 'blg-post';
 import './index.scss';
+export * from './action';
+export * from './reducer';
 export interface IProps {
+    match?: {
+        params: any;
+    };
+    loadList(data: Array<any>): any;
 }
 export interface IState {
     pagina: number;
     maximoPost: number;
     listPost: Array<postProps>;
 }
-export declare class ListPost extends React.Component<IProps, IState> {
-    constructor(props: IProps);
-    paginaSelecionada: (numPage: number) => void;
-    renderPost: () => JSX.Element[];
-    componentDidMount(): Promise<void>;
-    render(): JSX.Element;
-}
+export declare const ListPost: React.ComponentClass<Pick<IProps, "match">> & {
+    WrappedComponent: React.ComponentType<IProps>;
+};

@@ -1,1 +1,1 @@
-export declare function getListPost(): Promise<any>;
+export declare function getListPost(category: string): Promise<any>;
