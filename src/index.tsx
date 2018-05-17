@@ -12,13 +12,13 @@ export interface IProps {
     match?: {
         params: any
     }
-    loadList(data: Array<any>): any
+    loadList(data: Array<any>): any,
+    listPost: Array<postProps>
 }
 
 export interface IState {
     pagina: number
     maximoPost: number
-    listPost: Array<postProps>
 }
 
 class ListPostComponent extends React.Component<IProps, IState>{
@@ -26,8 +26,7 @@ class ListPostComponent extends React.Component<IProps, IState>{
         super(props);
         this.state = {
             pagina: 0,
-            maximoPost: 10,
-            listPost: []
+            maximoPost: 10
         }
     }
 
@@ -37,10 +36,10 @@ class ListPostComponent extends React.Component<IProps, IState>{
 
     renderPost = (): Array<JSX.Element> => {
         let listPost: Array<JSX.Element> = [];
-        let max = ((this.state.pagina + 1) * 5) > this.state.listPost.length ? this.state.listPost.length : ((this.state.pagina + 1) * 5)
+        let max = ((this.state.pagina + 1) * 5) > this.props.listPost.length ? this.props.listPost.length : ((this.state.pagina + 1) * 5)
         for (let i = (this.state.pagina * 5); i < max; i++) {
             listPost.push(
-                <Post key={i} {...this.state.listPost[i]} />
+                <Post key={i} {...this.props.listPost[i]} />
             )
         }
         return listPost;
@@ -49,7 +48,6 @@ class ListPostComponent extends React.Component<IProps, IState>{
     async componentDidMount() {
         let category = this.props.match ? this.props.match.params.category : null;
         let lista = await getListPost(category);
-        this.setState({ listPost: lista })
         this.props.loadList(lista);
     }
 
@@ -60,7 +58,7 @@ class ListPostComponent extends React.Component<IProps, IState>{
                     {this.renderPost()}
                 </div>
                 <Paginado
-                    cantPagina={Math.ceil((this.state.listPost.length / 5))}
+                    cantPagina={Math.ceil((this.props.listPost.length / 5))}
                     pageSelected={this.paginaSelecionada}
                 />
             </div>
@@ -75,4 +73,10 @@ const mapDispacht = (dispatch: any) => {
         }
     }
 }
-export const ListPost = connect(null, mapDispacht)(ListPostComponent)
+const mapStateToProps = (state: any) => {
+    return {
+        listPost: state.listPost
+    }
+}
+
+export const ListPost = connect(mapStateToProps, mapDispacht)(ListPostComponent)

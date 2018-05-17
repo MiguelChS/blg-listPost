@@ -10,11 +10,11 @@ export interface IProps {
         params: any;
     };
     loadList(data: Array<any>): any;
+    listPost: Array<postProps>;
 }
 export interface IState {
     pagina: number;
     maximoPost: number;
-    listPost: Array<postProps>;
 }
 export declare const ListPost: React.ComponentClass<Pick<IProps, "match">> & {
     WrappedComponent: React.ComponentType<IProps>;
