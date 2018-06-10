@@ -1,4 +1,3 @@
-/// <reference types="react" />
 /// <reference types="react-redux" />
 import * as React from 'react';
 import { IProps as postProps } from 'blg-post';
@@ -16,6 +15,6 @@ export interface IState {
     pagina: number;
     maximoPost: number;
 }
-export declare const ListPost: React.ComponentClass<Pick<IProps, "match">> & {
+export declare const ListPost: React.ComponentClass<Pick<IProps, "match" | undefined>> & {
     WrappedComponent: React.ComponentType<IProps>;
 };

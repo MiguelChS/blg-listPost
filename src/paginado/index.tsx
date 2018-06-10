@@ -24,6 +24,7 @@ export class Paginado extends React.Component<IProps, IState>{
         if (numPage == this.state.pageSeled) return;
         this.props.pageSelected(numPage);
         this.setState({ pageSeled: numPage })
+        window.scrollTo(0,0);
     }
 
     pageNext = () => {
