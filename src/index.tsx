@@ -44,14 +44,15 @@ class ListPostComponent extends React.Component<IProps, IState>{
         }
         return listPost;
     }
-
-    async componentDidMount() {
+    
+    async BuscarData(){
         let category = this.props.match ? this.props.match.params.category : null;
         let lista = await getListPost(category);
         this.props.loadList(lista);
     }
 
     render() {
+        this.BuscarData();
         return (
             <div className="blg-listPost">
                 <div>
