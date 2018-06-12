@@ -1,9 +1,10 @@
 import * as React from 'react';
-import { Post, IProps as postProps } from 'blg-post';
+import { Post, IProps as postProps, enumTypePost } from 'blg-post';
 import { Paginado } from './paginado';
 import { getListPost } from './service';
 import { connect } from 'react-redux';
 import './index.scss';
+import { Dispatch } from 'redux';
 import { loadListPost } from './action';
 export * from './action'
 export * from './reducer'
@@ -25,7 +26,7 @@ class ListPostComponent extends React.Component<IProps, IState>{
         super(props);
         this.state = {
             pagina: 0,
-            maximoPost: 5
+            maximoPost: 10
         }
     }
 
@@ -43,15 +44,14 @@ class ListPostComponent extends React.Component<IProps, IState>{
         }
         return listPost;
     }
-    
-    async BuscarData(){
+
+    async componentDidMount() {
         let category = this.props.match ? this.props.match.params.category : null;
         let lista = await getListPost(category);
         this.props.loadList(lista);
     }
 
     render() {
-        this.BuscarData();
         return (
             <div className="blg-listPost">
                 <div>
