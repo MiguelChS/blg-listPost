@@ -1,13 +1,10 @@
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const miniCSSExtractPluging = require('mini-css-extract-plugin');
+const optimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
-const extractSass = new ExtractTextPlugin({
-    filename: "index.css",
-    disable: process.env.NODE_ENV === "development"
-});
 module.exports = {
     entry: "./dev/index.tsx",
     output: {
-        filename: "bundle.js",
+        filename: "index.js",
         path: __dirname + "/dist"
     },
     // Enable sourcemaps for debugging webpack's output.
@@ -19,32 +16,26 @@ module.exports = {
     },
 
     module: {
-        rules: [
-            // All files with a '.ts' or '.tsx' extension will be handled by 'awesome-typescript-loader'.
-            {
-                test: /\.tsx?$/,
-                loader: "awesome-typescript-loader"
+        rules: [{
+            test: /\.tsx?$/,
+            loader: "awesome-typescript-loader"
+        }, {
+            test: /\.scss$/,
+            use: [{
+                loader: miniCSSExtractPluging.loader,
+            }, {
+                loader: 'css-loader',
             },
-
-            // All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'.
             {
-                enforce: "pre",
-                test: /\.js$/,
-                loader: "source-map-loader"
-            },
-
-            //load css
-            {
-                test: /\.(css|scss)$/,
-                use: extractSass.extract({
-                    use: [ {
-                        loader: "sass-loader"
-                    }]
-                })
+                loader: 'sass-loader',
             }
-        ]
+            ]
+        }]
     },
     plugins: [
-        extractSass
+        new optimizeCSSAssetsPlugin(),
+        new miniCSSExtractPluging({
+            filename: 'index.css',
+        }),
     ]
 };

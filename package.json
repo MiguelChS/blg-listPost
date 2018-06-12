@@ -1,6 +1,6 @@
 {
   "name": "blg-listpost",
-  "version": "1.0.9",
+  "version": "1.1.1",
   "description": "",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -21,23 +21,23 @@
     "react-redux": "^5.0.7"
   },
   "devDependencies": {
-    "@types/react-redux": "^5.0.16",
     "@types/react": "^16.0.36",
     "@types/react-dom": "^16.0.3",
+    "@types/react-redux": "^5.0.16",
     "awesome-typescript-loader": "^3.4.1",
     "bootstrap": "3.3.7",
     "css-loader": "^0.28.9",
-    "extract-text-webpack-plugin": "^4.0.0-beta.0",
+    "express": "^4.16.3",
     "font-awesome": "^4.7.0",
-    "node-sass": "^4.8.3",
+    "mini-css-extract-plugin": "^0.4.0",
+    "node-sass": "^4.9.0",
+    "optimize-css-assets-webpack-plugin": "^4.0.2",
     "react-dom": "^16.2.0",
+    "redux": "^4.0.0",
     "sass-loader": "^7.0.1",
-    "source-map-loader": "^0.2.3",
     "style-loader": "^0.20.1",
     "typescript": "^2.7.1",
-    "typings-for-css-modules-loader": "^1.7.0",
     "webpack": "^4.5.0",
-    "webpack-cli": "^2.0.14",
-    "webpack-dev-server": "^2.11.1"
+    "webpack-cli": "^2.0.14"
   }
 }
